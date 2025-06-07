@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Cyberpunk 3D Tilt Card</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #0f0f1a;
+            font-family: 'Orbitron', sans-serif;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .card {
+            width: 300px;
+            height: 400px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            border-radius: 20px;
+            box-shadow: 0 0 20px #08f7fe, 0 0 40px #ff00ff, 0 0 60px #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.1s ease, box-shadow 0.1s ease;
+            perspective: 1000px;
+            cursor: pointer;
+            transform-style: preserve-3d;
+        }
+
+        .card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #08f7fe;
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-shadow: 0 0 5px #08f7fe;
+        }
+
+        .card p {
+            font-size: 1rem;
+            margin-bottom: 20px;
+            opacity: 0.85;
+            text-shadow: 0 0 2px #ff00ff;
+        }
+
+        .card button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            background-image: linear-gradient(to right, #08f7fe, #ff00ff);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            text-shadow: 0 0 2px #fff;
+        }
+
+        .card button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #08f7fe, 0 0 20px #ff00ff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="card">
+        <img src="https://picsum.photos/300/180?random=7" alt="Cyberpunk Image" />
+        <h2>Cyberpunk Card</h2>
+        <p>Hover and tilt me in 3D space. Cyber vibes engaged.</p>
+        <button id="actionButton">Enter The Grid</button>
+    </div>
+
+    <script>
+        const card = document.getElementById('card');
+
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = -(y - centerY) / 15;
+            const rotateY = (x - centerX) / 15;
+
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        });
+
+        document.getElementById('actionButton').addEventListener('click', () => {
+            alert('🕶️ Welcome to the Cyber Grid!');
+        });
+    </script>
+
+</body>
+</html>
